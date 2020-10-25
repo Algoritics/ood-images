@@ -12,4 +12,16 @@ install -d /var/spool/slurmd
 sed -i 's/^PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 cp /build/launch-head /usr/local/sbin/launch
 
+echo "[TurboVNC]" >> /etc/yum.repos.d/TurboVNC.repo
+echo "name=TurboVNC official RPMs" >> /etc/yum.repos.d/TurboVNC.repo
+echo "baseurl=https://sourceforge.net/projects/turbovnc/files" >> /etc/yum.repos.d/TurboVNC.repo
+echo "gpgcheck=1 >> /etc/yum.repos.d/TurboVNC.repo"
+echo "gpgkey=https://sourceforge.net/projects/turbovnc/files/VGL-GPG-KEY" >> /etc/yum.repos.d/TurboVNC.repo
+echo "enabled=1" >> /etc/yum.repos.d/TurboVNC.repo
+
+yum -y update
+yum -y install nmap turbovnc xorg-x11-xauth
+pip3 install websockify
+yum -y groupinstall "MATE Desktop"
+
 yum clean all && rm -rf /var/cache/yum/*

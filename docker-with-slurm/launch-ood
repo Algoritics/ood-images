@@ -4,4 +4,6 @@ set -e
 
 runuser -u munge /usr/sbin/munged
 runuser -u ondemand-dex /usr/sbin/ondemand-dex serve /etc/ood/dex/config.yaml &
+
+rm -f /opt/rh/httpd24/root/etc/httpd/run/httpd.pid
 /opt/rh/httpd24/root/usr/sbin/httpd-scl-wrapper -DFOREGROUND
