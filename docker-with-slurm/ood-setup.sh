@@ -18,10 +18,15 @@ EOF
 /opt/ood/ood-portal-generator/sbin/update_ood_portal
 cp /build/launch-ood /usr/local/sbin/launch
 
-yum clean all && rm -rf /var/cache/yum/*
-
+# setup interactive desktop
 mkdir -p /etc/ood/config/apps/bc_desktop
 cat > /etc/ood/config/apps/bc_desktop/example.yml << EOF
 title: "Example Desktop"
 cluster: "example"
 EOF
+
+# setup jupyter app
+git clone https://github.com/OSC/bc_example_jupyter.git /var/www/ood/apps/sys/jupyter
+sed -i 's/cluster: ""/cluster: "example"/g' /var/www/ood/apps/sys/jupyter/form.yml
+
+yum clean all && rm -rf /var/cache/yum/*

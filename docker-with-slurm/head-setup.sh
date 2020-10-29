@@ -19,9 +19,16 @@ echo "gpgcheck=1 >> /etc/yum.repos.d/TurboVNC.repo"
 echo "gpgkey=https://sourceforge.net/projects/turbovnc/files/VGL-GPG-KEY" >> /etc/yum.repos.d/TurboVNC.repo
 echo "enabled=1" >> /etc/yum.repos.d/TurboVNC.repo
 
+# interactive desktop setup
 yum -y update
 yum -y install nmap turbovnc xorg-x11-xauth
 pip3 install websockify
 yum -y groupinstall "MATE Desktop"
+dbus-uuidgen > /etc/machine-id
+
+# jupyter setup
+pip3 install jupyter
 
 yum clean all && rm -rf /var/cache/yum/*
+
+
